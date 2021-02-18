@@ -1,41 +1,44 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      
-    </v-app-bar>
-
-    <v-content>
-      <RecipeList/>
-    <v-btn
-      absolute
-      dark
-      fab
-      bottom
-      right
-      color="red"
-    >
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
-    </v-content>
+  <v-app class="d-flex">
+    <div class="d-flex appContainer align-stretch">
+    
+      <div class="appContent">
+        <router-view></router-view>
+      </div>
+    </div>
   </v-app>
 </template>
 
 <script>
 import RecipeList from './components/RecipeList';
+import RecipeDisplay from './components/RecipeDisplay';
 
 export default {
   name: 'App',
-
+  computed: {
+    currentRecipe() {
+      return this.$store.state.currentRecipe
+    }
+  },
   components: {
-    RecipeList,
   },
 
-  data: () => ({
-    //
-  }),
+  data: () => {
+    return {
+      
+    }
+  },
 };
 </script>
+<style scoped>
+  .appContainer {height: 100%;}
+  .appContent {
+    overflow-y:auto;
+    height: 100%;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+</style>

@@ -1,31 +1,20 @@
 <template>
-  <v-container>
-    <v-layout
-      text-center
-      wrap
-    >
-      <v-flex xs12>
-        <v-img
-          :src="require('../assets/recipe_logo.jpeg')"
-          class="my-3"
-          contain
-          height="200"
-        ></v-img>
-      </v-flex>
-      <v-flex v-for="recipe in recipes" v-bind:key="recipe.title">
-        <v-card class="recipeCard">
+    <div>
+      <v-flex v-for="recipe in recipes" v-bind:key="recipe.id">
+        <v-card class="recipeCard" @click="showRecipe(recipe)">
           <v-img
-              :src="recipe.image"
+              :src="baseUrl + recipe.imageUrl"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
+              width="430px"
+              cover="true"
             >
             <v-card-title v-text="recipe.title"></v-card-title>
           </v-img>
         </v-card>
       </v-flex>
-    </v-layout>
-  </v-container>
+    </div>
 </template>
 
 <style scoped>
@@ -37,18 +26,26 @@
 <script>
 export default {
   name: 'RecipeList',
+  computed: {
+    baseUrl() {
+      return this.$store.state.baseUrl
+    },
+    currentRecipe() {
+      return this.$store.state.currentRecipe
+    },
+    recipes() {
+      return this.$store.state.recipes
+    }
+  },
+  methods: {
+    showRecipe: function(recipe){
+      this.$store.commit('setCurrentRecipe', recipe)  
+      this.$router.push('recipe')
+    }
+  },
 
-  data: function() {
-return {
-    recipes: [
-      {title: 'Spaghetti Bolognese',
-      image: require('../assets/spaghetti-bolognese.jpeg'),
-      url: 'https://www.lecker.de/spaghetti-bolognese-38274.html'},
-      {title: 'Ribollata',
-      image: require('../assets/ribollita.jpeg'),
-      url: 'https://rezeptebuch.com/rezept/31637'}
-    ]
-  };
-},
+  mounted: function() {
+    this.$store.commit('loadRecipes') 
+  },
 };
 </script>
