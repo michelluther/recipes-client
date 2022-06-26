@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import RecipeList from './components/RecipeList';
-import RecipeDisplay from './components/RecipeDisplay';
 
 export default {
   name: 'App',

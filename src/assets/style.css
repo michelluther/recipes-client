@@ -1,3 +1,7 @@
 html, body, .v-application {
     height: 100%;
 }
+
+h1 {
+    font-family: 'Amatic SC', cursive;
+}

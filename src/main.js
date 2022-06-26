@@ -10,6 +10,7 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import RecipeList from './components/RecipeList';
 import RecipeDisplay from './components/RecipeDisplay';
+import Home from './components/Home';
 
 Vue.config.productionTip = false
 
@@ -80,6 +81,9 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
+      component: Home
+    },{
+      path: '/recipes',
       component: RecipeList
     },
     {
